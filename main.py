@@ -61,7 +61,7 @@ async def create_upload_file(file: UploadFile = File(...), prompt: str = Form(..
 async def create_upload_file(logo: UploadFile = File(...),color_hex_code: str = Form(...),
                              punch_line: str = Form(...), button:str = Form(...) ):
 
-   #return StreamingResponse(img_byte_array, media_type="image/png")
+   return StreamingResponse(img_byte_array, media_type="image/png")
 
 
 @app.get("/")
