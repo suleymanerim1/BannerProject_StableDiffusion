@@ -1,4 +1,6 @@
+import uvicorn
 from fastapi import FastAPI, File, UploadFile, Form
+from mangum import Mangum
 from fastapi.responses import StreamingResponse, Response
 from PIL import Image
 from io import BytesIO
@@ -10,7 +12,7 @@ from ad_creator import create_ad_template, produce_diffusion_image
 
 # to run app : uvicorn main:app --reload
 app = FastAPI()
-
+handler = Mangum(app)
 
 @app.post("/task1/")
 async def task1(file: UploadFile = File(...), prompt: str = Form(...), hex_code: str = Form(...)):
@@ -66,4 +68,5 @@ async def task2(logo: UploadFile = File(...),color_hex_code: str = Form(...),
 def read_root():
     return {"Hello": "World"}
 
-
+if __name__ == '__main__':
+    uvicorn.run(app,host="0.0.0.0",port=8000)
