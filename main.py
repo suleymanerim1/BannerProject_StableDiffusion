@@ -7,14 +7,13 @@ from ad_creator import create_ad_template, produce_diffusion_image
 
 
 #TODO: webcolors library does not include many html hex code , check it
-#TODO:
 
 # to run app : uvicorn main:app --reload
 app = FastAPI()
 
 
 @app.post("/task1/")
-async def create_upload_file(file: UploadFile = File(...), prompt: str = Form(...), hex_code: str = Form(...)):
+async def task1(file: UploadFile = File(...), prompt: str = Form(...), hex_code: str = Form(...)):
 
     img = Image.open(BytesIO(await file.read()))
 
@@ -39,11 +38,11 @@ async def create_upload_file(file: UploadFile = File(...), prompt: str = Form(..
 
     modified_img.save("image.png")
     # Return the modified image
-    return StreamingResponse(img_byte_array, media_type="image/png")
+    return Response(img_byte_array, media_type="image/png")
 
 
 @app.post("/task2/")
-async def create_upload_file(logo: UploadFile = File(...),color_hex_code: str = Form(...),
+async def task2(logo: UploadFile = File(...),color_hex_code: str = Form(...),
                              punch_line: str = Form(...), button:str = Form(...) ):
 
     logo_img = Image.open(BytesIO(await logo.read()))
@@ -59,7 +58,7 @@ async def create_upload_file(logo: UploadFile = File(...),color_hex_code: str = 
 
 
     # Return the ad template as a response
-    return StreamingResponse(content=img_byte_array, media_type="image/png")
+    return Response(content=img_byte_array, media_type="image/png")
 
 
 
