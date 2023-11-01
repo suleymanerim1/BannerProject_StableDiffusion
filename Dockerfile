@@ -5,7 +5,7 @@
 # https://docs.docker.com/engine/reference/builder/
 
 ARG PYTHON_VERSION=3.9.13
-FROM python:${PYTHON_VERSION} as base
+FROM python:${PYTHON_VERSION}-slim as base
 # I deleted slim for now
 
 # Prevents Python from writing pyc files.
