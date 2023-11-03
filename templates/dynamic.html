@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ADVERTISEMENT CREATOR APPLICATION</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #f4f4f4;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #333;
+    }
+
+    .container {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+    }
+
+    .form-container {
+      border: 1px solid #ccc;
+      padding: 20px;
+      width: 300px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-container label {
+      display: block;
+      margin-bottom: 5px;
+      color: #555;
+    }
+
+    .form-container input[type="text"],
+    .form-container input[type="file"],
+    .form-container input[type="submit"] {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .form-container input[type="submit"] {
+      background-color: #337ab7;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .form-container input[type="submit"]:hover {
+      background-color: #235a8e;
+    }
+
+    .rendered-image {
+      border: 10px solid black;
+      padding: 10px;
+      display: none;
+      text-align: center;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+  </style>
+  <script>
+    function showImage() {
+      document.querySelector('.rendered-image').style.display = 'block';
+    }
+  </script>
+</head>
+<body>
+  <h1>ADVERTISEMENT CREATOR APPLICATION</h1>
+
+  <div class="container">
+    <div class="form-container">
+      <form action="/dynamic" enctype="multipart/form-data" method="POST" onsubmit="showImage()">
+        <label for="img">Image:</label>
+        <input name="file" id="img" type="file">
+        <label for="logo">Logo:</label>
+        <input name="logo" id="logo" type="file">
+
+        <label for="prompt">Prompt:</label>
+        <input name="prompt" id="prompt" type="text">
+        <label for="hex1">Image Hex Code:</label>
+        <input name="img_hex_code" id="hex1" type="text">
+
+        <label for="hex2">Color Hex Code:</label>
+        <input name="color_hex_code" id="hex2" type="text">
+        <label for="punch">Punch Line:</label>
+        <input name="punch_line" id="punch" type="text">
+
+        <label for="button">Button:</label>
+        <input name="button" id="button" type="text">
+
+        <input type="submit" value="Generate Ad">
+      </form>
+    </div>
+
+    <div class="rendered-image">
+      {% if img %}
+        <h2>Rendered Advertisement</h2>
+        <img src="data:image/png;base64,{{ img }}" />
+      {% else %}
+        <h2>The process is ongoing....</h2>
+        <h2>Ad will be rendered here...</h2>
+      {% endif %}
+    </div>
+  </div>
+
+</body>
+</html>
