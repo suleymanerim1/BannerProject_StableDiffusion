@@ -25,7 +25,7 @@ Please note that due to the computational complexity of the image rendering proc
 
 ## Usage
 
-visit the following link: [Ad Fast Api Space]((https://huggingface.co/spaces/suleymanerim1/ad_fast_api))
+visit the following link: [Ad Fast Api Space](https://huggingface.co/spaces/suleymanerim1/ad_fast_api)
 
 | Usage Example <br> <sub>(Click to enlarge)</sub> | Result Example <br> <sub>(Click to enlarge)</sub> |
 |-------------------------|------------------------|
