@@ -30,7 +30,7 @@ def text_wrap(text, font, max_width):
         i = 0
         while i < len(words):
             line = ''
-            while i < len(words) and font.getsize(line + words[i])[0] <= max_width:
+            while i < len(words) and len(line + words[i]) <= max_width:
                 line = line + words[i] + ' '
                 i += 1
             lines.append(line)
@@ -61,7 +61,7 @@ def create_ad_template(main_img, logo_img, color, punchline_text, button_text, )
 
     logo_height = 80  # Adjust according to the logo's height
     logo_img = resize_proportional(img=logo_img, new_height=logo_height)
-    main_image_height = 300  # Adjust according to the main image's height
+    main_image_height = 256  # Adjust according to the main image's height
     main_img = resize_proportional(img=main_img, new_height=main_image_height)
 
     # Calculate vertical gaps and positions to center the elements
@@ -84,14 +84,16 @@ def create_ad_template(main_img, logo_img, color, punchline_text, button_text, )
 
     # Draw punchline text
     draw = ImageDraw.Draw(ad_template)
-    punchline_font = ImageFont.truetype("arial.ttf", punchline_font_size)
-    button_font = ImageFont.truetype("arial.ttf", button_font_size)
+    punchline_font = ImageFont.load_default()
+    #punchline_font = ImageFont.truetype("arial.ttf", punchline_font_size)
+    button_font = ImageFont.load_default()
+    #button_font = ImageFont.truetype("arial.ttf", button_font_size)
 
     # Calculate the text height for positioning
     text_position = start_y + logo_height + 2 * gap + main_image_height
 
     # Wrap punchline text to fit within the width
-    max_width = width - 40  # Adjust according to design
+    max_width = 50 #main_img.width  # Adjust according to design
     lines = text_wrap(punchline_text, punchline_font, max_width)
     for line in lines:
         # text_width, text_height = draw.textbbox (line, font=punchline_font)
@@ -104,7 +106,7 @@ def create_ad_template(main_img, logo_img, color, punchline_text, button_text, )
         text_height = text_box[3] - text_box[1]
 
         draw.text(((width - text_width) / 2, text_position), line, fill=color, font=punchline_font)
-        text_position += text_height
+        text_position += text_height*4/3
 
     # Draw button with specified color and white text
     # button_text_width, button_text_height = draw.textsize(button_text, font=button_font)
@@ -142,18 +144,21 @@ def produce_diffusion_image(image: Image.Image, prompt: str, color_name: str):
     model_id_or_path = "runwayml/stable-diffusion-v1-5"
     pipe = StableDiffusionImg2ImgPipeline.from_pretrained(
         model_id_or_path,
-        use_auth_token="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",
-        safety_checker=None
+        use_auth_token="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",
+        safety_checker=None,
+
     )
 
     prompt_with_color = prompt + ", " + "use color " + color_name
 
     init_image = image.resize((512, 512))
+    print(init_image.size)
+
     created_image = pipe(prompt=prompt_with_color,
                          image=init_image,
-                         strength=0.5,
-                         num_inference_steps=30,
-                         guidance_scale=5).images[0]
+                         strength=0.6,
+                         num_inference_steps=50,
+                         guidance_scale=7.5).images[0]
 
     return created_image
 
@@ -161,9 +166,15 @@ def produce_diffusion_image(image: Image.Image, prompt: str, color_name: str):
 if __name__ == '__main__':
     # Example usage
     logo_image = Image.open('trial_logo.png')
-    main_image = Image.open('image.png')
+    main_image = Image.open('modified_img.png')
     color = '#ff0000'
-    punchline_text = 'Your long punchline text goes here and it should wrap to multiple lines if it exceeds the specified width '
+    punchline_text = ('Your long punchline text goes here and it should wrap to multiple lines if it exceeds the specified width '
+                      'Your long punchline text goes here and it should wrap to multiple lines if it exceeds the specified width'
+                      'Your long punchline text goes here and it should wrap to multiple lines if it exceeds the specified width')
     button_text = 'Click Here'
+    prompt = "black hair, female cat, put glass on face"
 
     create_ad_template(main_image, logo_image, color, punchline_text, button_text)
+    #modified_img = produce_diffusion_image(main_image,prompt,color)
+    #modified_img.show()
+    #modified_img.save("modified_img.png")

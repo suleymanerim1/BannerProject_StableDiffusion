@@ -17,15 +17,15 @@ app = FastAPI()
 templates = Jinja2Templates(directory="templates")
 
 
-# uvicorn dynamic:app --reload
+# uvicorn main:app --reload
 
 @app.get("/")
 def dynamic_file(request: Request):
-    return templates.TemplateResponse("dynamic.html", {"request": request})
+    return templates.TemplateResponse("get_input.html", {"request": request})
 
 
-@app.post("/dynamic")
-async def dynamic(request: Request,
+@app.post("/ad")
+async def ad(request: Request,
                   file: UploadFile = File(),
                   prompt: str = Form(...),
                   img_hex_code: str = Form(...),
@@ -51,7 +51,6 @@ async def dynamic(request: Request,
 
     ad_template = create_ad_template(modified_img, logo_img, color_hex_code, punch_line, button)
 
-    # encoding the image
     # Convert the 'PngImageFile' object to bytes
     img_bytes = BytesIO()
     ad_template.save(img_bytes, format='PNG')
@@ -59,4 +58,4 @@ async def dynamic(request: Request,
     encoded_image = base64.b64encode(img_bytes).decode("utf-8")
 
     return templates.TemplateResponse(
-        "dynamic.html", {"request": request, "img": encoded_image})
+        "ad_display.html", {"request": request, "img": encoded_image})
