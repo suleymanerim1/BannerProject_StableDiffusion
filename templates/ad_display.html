@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ad Display</title>
+    <style>
+        /* Add your styles here */
+
+        /* For example: */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .rendered-image {
+            margin: 20px auto;
+            padding: 20px;
+           border: 10px solid black;
+            background-color: #ead8d8;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Ad Display</h1>
+    <div class="rendered-image">
+        <img src="data:image/png;base64,{{ img }}" />
+    </div>
+</body>
+</html>

@@ -86,16 +86,18 @@
 
   <div class="container">
     <div class="form-container">
-      <form action="/dynamic" enctype="multipart/form-data" method="POST" onsubmit="showImage()">
+      <form action="/ad" enctype="multipart/form-data" method="POST" onsubmit="showImage()">
         <label for="img">Image:</label>
         <input name="file" id="img" type="file">
-        <label for="logo">Logo:</label>
-        <input name="logo" id="logo" type="file">
 
         <label for="prompt">Prompt:</label>
         <input name="prompt" id="prompt" type="text">
         <label for="hex1">Image Hex Code:</label>
         <input name="img_hex_code" id="hex1" type="text">
+
+        <label for="logo">Logo:</label>
+        <input name="logo" id="logo" type="file">
+
 
         <label for="hex2">Color Hex Code:</label>
         <input name="color_hex_code" id="hex2" type="text">
@@ -110,13 +112,8 @@
     </div>
 
     <div class="rendered-image">
-      {% if img %}
-        <h2>Rendered Advertisement</h2>
-        <img src="data:image/png;base64,{{ img }}" />
-      {% else %}
         <h2>The process is ongoing....</h2>
         <h2>Ad will be rendered here...</h2>
-      {% endif %}
     </div>
   </div>
 
