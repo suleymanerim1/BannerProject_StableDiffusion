@@ -29,7 +29,7 @@ visit the following link: [Ad Fast Api Space](https://huggingface.co/spaces/sule
 
 | Usage Example <br> <sub>(Click to enlarge)</sub> | Result Example <br> <sub>(Click to enlarge)</sub> |
 |-------------------------|------------------------|
-| <img src="usage.png" width="400"> | <img src="result.png" width="400"> |
+| <img src="images/usage.png" height="400" width="400"> | <img src="images/result.png" height="400" width="400"> |
 
 ## Project Structure
 ```bash
