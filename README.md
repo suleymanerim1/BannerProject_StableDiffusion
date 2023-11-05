@@ -12,16 +12,20 @@ This project implements a Python application that leverages Stable Diffusion for
 ## General Info
 The project's main objective is to generate new images resembling a provided stock photo using Stable Diffusion's Img2Img pipeline. FastAPI is utilized to create an API endpoint, enabling users to input image, text prompt, and color(hex code), and receiving a generated image in return. The HTML interface facilitates user interaction, displaying the resulting image. Docker is employed for containerization and deployment on Hugging Face Spaces.
 
-##3 Task
+### Task
 - Utilized Stable Diffusion's Img2Img pipeline to generate images resembling a provided stock photo.
 - Use the generated image along with other specified inputs to craft a basic dynamic advertising template.
 - Created an API endpoint using FastAPI to receive inputs and return generated images.
 - Implemented an HTML interface for user interaction and image display.
 - Dockerized the application for easy deployment on Hugging Face Spaces.
 
+### Important Note
+
+Please note that due to the computational complexity of the image rendering process, it may take approximately 5-10 minutes to generate a single ad template.
+
 ## Usage
-To access the deployed application on Hugging Face Spaces, visit the following link:
-[Dynamic Image Advertising Template on Hugging Face Spaces](https://huggingface.co/spaces/suleymanerim1/ad_fast_api/tree/main/templates)
+
+visit the following link: [Ad Fast Api Space](https://huggingface.co/spaces/suleymanerim1/ad_fast_api/tree/main/templates)
 
 | Usage Example <br> <sub>(Click to enlarge)</sub> | Result Example <br> <sub>(Click to enlarge)</sub> |
 |-------------------------|------------------------|
